@@ -78,4 +78,12 @@ public class CreateScene : MonoBehaviour
             }
         }
     }
+
+    void CelestialObject()
+    {
+        Light light = FindFirstObjectByType<Light>();
+
+        GameObject pivot = new GameObject("Pivot");
+        pivot.transform.position = new Vector3(0, 0, 0);
+    }
 }
