@@ -4,6 +4,9 @@ public class CreateScene : MonoBehaviour
 {
     public int forestSize;
     public int pyramidGrid;
+    public float daySpeed;
+
+    private GameObject pivot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -11,12 +14,13 @@ public class CreateScene : MonoBehaviour
         CreateGround();
         CreateForest();
         CreatePyramid();
+        CelestialObject();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        pivot.transform.Rotate(Vector3.right * daySpeed * Time.deltaTime);
     }
     void CreateGround()
     {
@@ -54,11 +58,11 @@ public class CreateScene : MonoBehaviour
         GameObject pyramid = new GameObject();
         pyramid.name = "Pyramid";
 
-        for (int layer = 0; layer < pyramidGrid; layer++)
+        for (int i = 0; i < pyramidGrid; i++)
         {
-            int currentSize = pyramidGrid - layer;
+            int currentSize = pyramidGrid - i;
 
-            float offset = layer * 0.5f;
+            float offset = i * 0.5f;
 
             for (int x = 0; x < currentSize; x++)
             {
@@ -67,10 +71,9 @@ public class CreateScene : MonoBehaviour
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
                     float xPos = x - (pyramidGrid / 2f) + offset - (pyramidGrid / 2);
-                    float yPos = layer + 0.5f;
                     float zPos = z - (pyramidGrid / 2f) + offset - (pyramidGrid / 2);
 
-                    cube.transform.position = new Vector3(xPos, yPos, zPos);
+                    cube.transform.position = new Vector3(xPos, i + 0.5f, zPos);
                     cube.transform.localScale = new Vector3(0.9f, 1f, 0.9f);
 
                     cube.transform.SetParent(pyramid.transform);
@@ -83,7 +86,18 @@ public class CreateScene : MonoBehaviour
     {
         Light light = FindFirstObjectByType<Light>();
 
-        GameObject pivot = new GameObject("Pivot");
+        pivot = new GameObject("Pivot");
         pivot.transform.position = new Vector3(0, 0, 0);
+
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+        sphere.transform.position = new Vector3(0, 50, 0);
+        sphere.transform.localScale = new Vector3(10, 10, 10);
+
+        sphere.transform.SetParent(pivot.transform);
+        
+        light.transform.position = new Vector3(0, 50, 0);
+
+        light.transform.SetParent(pivot.transform);
     }
 }
