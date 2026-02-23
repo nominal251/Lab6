@@ -96,7 +96,7 @@ public class CreateScene : MonoBehaviour
 
         sphere.transform.SetParent(pivot.transform);
         
-        light.transform.position = new Vector3(0, 50, 0);
+        light.transform.position = new Vector3(0, 100, 0);
 
         light.transform.SetParent(pivot.transform);
     }

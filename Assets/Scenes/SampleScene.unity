@@ -414,6 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CreateScene
   forestSize: 15
   pyramidGrid: 12
+  daySpeed: 20
 --- !u!4 &832265083
 Transform:
   m_ObjectHideFlags: 0
